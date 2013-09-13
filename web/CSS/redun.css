@@ -1,0 +1,26 @@
+/* 
+    Document   : redun
+    Created on : Aug 12, 2012, 3:11:49 PM
+    Author     : Anjaneyulu
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.redbutton{
+                padding: 1px 0px 2px;
+                height:30px;
+                width:80px;
+                background-color: #4343eb;
+                color: white;
+                border-width: 0;
+                border-radius: 6px;;
+                font-weight:bolder;
+                font-size: 16px;
+                font-family: verdana,arial,sans-serif;
+}
+.redbutton:hover{
+                cursor:pointer;
+                color:#eeeeee;
+                background-color: #435fff;
+                text-decoration: underline;
+                /*font-size: 18px;*/
+}

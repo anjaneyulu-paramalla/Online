@@ -1,0 +1,88 @@
+/* 
+    Document   : Admin
+    Created on : Jul 8, 2012, 5:11:11 PM
+    Author     : Anjaneyulu
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.links{
+    padding: 1px 0px 2px;
+    width:200px;
+    height:50px;
+    background-color: #4343eb;
+    color: white;
+    border-width: 0;
+    border-radius: 10px;;
+    font-weight:bolder;
+    font-size: 18px;
+    font-family: verdana,arial,sans-serif;
+}
+.links:hover{
+    cursor:pointer;
+    color:#eeeeee;
+    background-color: #435fff;
+    text-decoration: underline;
+    margin-top: -10px;
+}
+.ref{
+    border-color: #4343eb;
+    border-top-right-radius: 15px ;
+    border-top-left-radius: 15px ;
+    border-bottom-left-radius: 3mm;
+    border-bottom-right-radius: 3mm;
+    margin-top: -15px;
+}
+.ref td{border-width: 1px;
+    padding: 0px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    background-color: #4343eb;
+}
+.ref td:hover{
+    cursor:pointer;
+    background-color: #435fff;
+    color:#eeeeee;
+}
+.ref a:link{
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.ref a:visited{
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.ref a:hover{
+	text-decoration: none;
+	color: #CC6600;
+        color:wheat;
+}
+.cap{
+    padding:0mm;
+    margin: 0px;
+    font-size: 3mm;
+    text-align: center;
+    background-color:#6666ff;
+    color: white;
+    border-right-width: 3mm;
+    border-bottom-right-radius: 2mm;
+    border-bottom-left-radius:2mm ;
+}
+.decide{
+    padding: 1px 2px 2px;
+    height:7mm;
+    background-color: transparent;
+    color:blue;
+    border-width: 0;
+    border-radius: 0.4em;
+    font-weight:bolder;
+    font-size: 13px;
+    font-family: verdana,arial,sans-serif;
+}
+.decide:hover{
+    cursor:pointer;
+    background-color: transparent;
+    color: blue;
+}

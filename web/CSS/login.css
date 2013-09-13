@@ -1,0 +1,137 @@
+/* 
+    Document   : login
+    Created on : Jun 26, 2012, 1:38:22 AM
+    Author     : Anjaneyulu
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.Main{
+    border-style: groove;
+    border-top-width: 3mm;border-left-width: 1px;border-right-width: 2px;border-bottom-width: 1mm;
+    border-top-left-radius: 3mm;border-top-right-radius: 3mm;border-bottom-left-radius: 3mm;border-bottom-right-radius: 3mm;
+    border-color:#6666ff;
+}
+.Ftitle{
+    font-family: algerian;
+    font-size:1cm;
+    color:#003333;
+    background-color:#ccccff ;
+    border-width: 0;
+}
+.desc{
+    background-color:#eeeeff;
+    border-width:1px;
+    font-family:algerian;
+    font-size:5mm;
+    color:#765634;
+}
+.vline{
+    background-color: #ccccff;
+    border-width: 0 ;
+}
+.login{
+    border-width:1px;
+    border-left-width: 0;
+    background-color:#eeeeff;
+    font-size: 4mm;
+    font-weight: bold;
+    color:blue;
+    font-family:verdana,fantasy;
+}
+.ref td{border-width: 1px;
+    padding: 0px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    background-color: #4343eb;
+}
+.ref a:link{
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.ref a:visited{
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.ref a:hover{
+	text-decoration: none;
+	color: #CC6600;
+        color:wheat;
+}
+.cap{
+    padding:0mm;
+    margin: 0px;
+    font-size: 3mm;
+    text-align: center;
+    background-color:#6666ff;
+    color: white;
+    border-right-width: 3mm;
+    border-bottom-right-radius: 2mm;
+    border-bottom-left-radius:2mm ;
+}
+.button{
+    padding: 1px 1px 2px;
+    height:7mm;
+    width:15mm;
+    background-color: #4343eb;
+    color: whitesmoke;
+    border-radius: 0.4em;
+    font-weight:bolder;
+    font-size: 13px;
+    font-family: verdana,arial,sans-serif;
+}
+.button:hover{
+    text-decoration: underline;
+    cursor:pointer;
+    color:#dddddd;
+}
+.decide{
+    /*padding: 1px 2px 2px;
+    /*height:7px;
+    /*background-color: #4343eb;
+    color: whitesmoke;*/
+    background-color: transparent;
+    color:blue;
+    border-width: 0;
+    border-radius: 0.4em;
+    font-weight:bolder;
+    font-size: 13px;
+    font-family: verdana,arial,sans-serif;
+}
+.decide:hover{
+    cursor:pointer;
+    /*text-decoration: underline;
+    color:#dddddd;
+    background-color: #435fff;*/
+    background-color: transparent;
+    color: blue;
+}
+.links{
+    padding: 1px 0px 2px;
+    margin-top: 10px;
+    margin-bottom: -10px;
+    height:15mm;
+    width: 200px ;
+    background-color: #4343eb;
+    color: white;
+    border-radius: 0.8em;
+    font-weight:bolder;
+    font-size: 16px;
+    font-family: verdana,arial,sans-serif;
+}
+.links:hover{
+    cursor:pointer;
+    color:#eeeeee;
+    font-size: 18px;
+    text-decoration: underline;
+}
+.cant{
+    font-weight:400;
+    color:blue;
+    text-decoration: none;
+}
+.cant:hover{
+    text-decoration: underline;
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!--database configuration-->
+	
+	<entry key="driver">com.jdbc.mysql.Driver</entry>
+	<entry key="url">jdbc:mysql://localhost:3306/"</entry>
+	
+	<!--database users-->
+	
+	<entry key="root-user">root</entry>
+	<entry key="root-password">GRIETITOLFF1202</entry>
+	
+	<!--gmail credentials-->
+	<entry key="mail-id"></entry>
+	<entry key="mail-password"></entry>
+	
+</properties>

@@ -1,0 +1,27 @@
+/* 
+    Document   : ChangeButton
+    Created on : Jan 13, 2013, 6:31:14 PM
+    Author     : Anji
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+ button{
+    padding: 1px 0px 2px;
+    height:30px;
+    width:160px;
+    background-color: #4343eb;
+    color: white;
+    border-width: 0;
+    border-radius: 6px;
+    font-weight:bolder;
+    font-size: 14px;
+    font-family: verdana,arial,sans-serif;
+}
+button:hover{
+    cursor:pointer;
+    color:#eeeeee;
+    background-color: #435fff;
+    text-decoration: underline;
+    /*font-size: 15px;*/
+}

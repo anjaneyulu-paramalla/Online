@@ -1,0 +1,26 @@
+/* 
+    Document   : settings
+    Created on : Jul 23, 2012, 11:48:11 PM
+    Author     : Anjaneyulu
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.edit td button{
+    padding: 1px 0px 2px;
+    height:50px;
+    background-color: #4343eb;
+    color: white;
+    border-width: 0;
+    border-radius: 10px;;
+    font-weight:bolder;
+    font-size: 18px;
+    font-family: verdana,arial,sans-serif;
+}
+.edit td button:hover{
+    cursor:pointer;
+    color:#eeeeee;
+    background-color: #435fff;
+    text-decoration: underline;
+    font-size: 20px;
+}
+
