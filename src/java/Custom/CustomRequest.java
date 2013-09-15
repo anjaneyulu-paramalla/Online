@@ -20,7 +20,7 @@ import org.apache.commons.fileupload.util.Streams;
 public class CustomRequest {
 
     public HashMap<String, String> hm = new HashMap<String, String>();
-    public HashMap<String, File> hf = new HashMap<String, File>();
+    public HashMap<String, String> hf = new HashMap<String, String>();
     FileItemStream item = null;
     ServletFileUpload upload = new ServletFileUpload();
     FileItemIterator iter = null;
@@ -40,19 +40,20 @@ public class CustomRequest {
                 String key = item.getFieldName();
                 String val = item.getName();
                 hm.put(key, val);
-                File f=new File("../TempData/"+dept);
+                /*File f=new File("../TempData/"+dept);
                 System.out.println(f.mkdir());
                 System.out.println(f.getAbsolutePath());
                 f=new File("../TempData/"+dept+"/"+"year"+year+key+".csv");
-                PrintWriter pw=new PrintWriter(f);
+                PrintWriter pw=new PrintWriter(f);*/
                 BufferedReader br=new BufferedReader(new InputStreamReader(item.openStream()));
+                String store="";
                 String str;
                 while((str=br.readLine())!=null){
-                    pw.println(str);
+                    store+=str+"\n";
                 }
-                pw.flush();
+                //pw.flush();
                 br.close();
-                hf.put(key, f);
+                hf.put(key+"data", store); 
             }
         }
     }
@@ -68,12 +69,12 @@ public class CustomRequest {
      * To get the contents of a file
      */
 
-    public File getFileStream(String fileName) {
-        return hf.get(fileName);        
+    public String getFileStream(String fileName) {
+        return hf.get(fileName+"data");        
     }
 
     @Override
     public String toString() {
-        return "" + hm;
+        return "" + hm+hf;
     }
 }

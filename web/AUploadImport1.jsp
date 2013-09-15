@@ -4,6 +4,7 @@
     Author     : Anji
 --%>
 
+<%@page import="java.io.StringReader"%>
 <%@page import="org.apache.commons.fileupload.FileItemIterator"%>
 <%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@page import="org.apache.commons.fileupload.FileItemStream"%>
@@ -87,7 +88,7 @@
                                             int fdotlen=fname.trim().lastIndexOf('.')+1;
                                             if(fname.trim().toLowerCase().substring(fdotlen, fflen).equals("csv")){
                                                 try{
-                                                    BufferedReader br=new BufferedReader(new FileReader(customrequest.getFileStream(fkey))); 
+                                                    BufferedReader br=new BufferedReader(new StringReader(customrequest.getFileStream(fkey))); 
                                                     String str=new String();
                                                     int j=0,skip=0,sno=0; 
                                                     String stud[]={"","","",""};
@@ -363,13 +364,13 @@
                             if(err==""){
                                 int fplen=FacPath.length()-1;
                                 char lastchar=FacPath.charAt(fplen);
-                                if(lastchar!='\\'||lastchar!='/'){
+                                /*if(lastchar!='\\'||lastchar!='/'){
                                     if(FacPath.contains("\\")){
                                         FacPath=FacPath+"\\";
                                     }
                                     else
                                         FacPath=FacPath+"/";
-                                }
+                                }*/
                                 FacPath=FacPath+FacName;%>
                                 <input type="hidden" name="facfile" value="<%=FacPath%>" />
                                 <input type="hidden" name="facskip" value="<%=FacSkip%>" />
