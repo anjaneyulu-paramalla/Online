@@ -28,7 +28,7 @@ public class CustomRequest {
     /*
      * constructor
      */
-    public CustomRequest(HttpServletRequest request,String dept,String year) throws FileUploadException, IOException {
+    public CustomRequest(HttpServletRequest request, String dept, String year) throws FileUploadException, IOException {
         iter = upload.getItemIterator(request);
         while (iter.hasNext()) {
             item = iter.next();
@@ -40,41 +40,34 @@ public class CustomRequest {
                 String key = item.getFieldName();
                 String val = item.getName();
                 hm.put(key, val);
-                /*File f=new File("../TempData/"+dept);
-                System.out.println(f.mkdir());
-                System.out.println(f.getAbsolutePath());
-                f=new File("../TempData/"+dept+"/"+"year"+year+key+".csv");
-                PrintWriter pw=new PrintWriter(f);*/
-                BufferedReader br=new BufferedReader(new InputStreamReader(item.openStream()));
-                String store="";
+                BufferedReader br = new BufferedReader(new InputStreamReader(item.openStream()));
+                String store = "";
                 String str;
-                while((str=br.readLine())!=null){
-                    store+=str+"\n";
+                while ((str = br.readLine()) != null) {
+                    store += str + "\n";
                 }
-                //pw.flush();
                 br.close();
-                hf.put(key+"data", store); 
+                hf.put(key + "data", store);
             }
         }
     }
-    
+
     /*
      * simulation of getParameter method of request.
      */
     public String getParameter(String key) {
         return hm.get(key);
     }
-    
-    /*
-     * To get the contents of a file
-     */
 
+    /*
+     * To get the contents of a file.s
+     */
     public String getFileStream(String fileName) {
-        return hf.get(fileName+"data");        
+        return hf.get(fileName + "data");
     }
 
     @Override
     public String toString() {
-        return "" + hm+hf;
+        return "" + hm + hf;
     }
 }
