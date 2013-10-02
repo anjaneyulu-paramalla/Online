@@ -133,9 +133,7 @@
                else{%>
                    <center><h2><u>Faculty data download</u>:</h2></center>
                    <%String format=request.getParameter("fformat");                            
-                   Class.forName("com.mysql.jdbc.Driver");
-                   String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                   Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                   Connection con=new Connector(dept).getConnection();
                    Statement st=con.createStatement();
                    String sql="select count(*) from faculty";
                    ResultSet rs=st.executeQuery(sql);
@@ -171,9 +169,7 @@
                int year=Integer.parseInt(request.getParameter("year"));
                String section=request.getParameter("section");
                String format=request.getParameter("sformat").trim().toLowerCase();
-               Class.forName("com.mysql.jdbc.Driver");
-               String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-               Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+               Connection con=new Connector(dept).getConnection();
                Statement st=con.createStatement();
                String sql="select UID,UNAME,EMAILID,MOBILE from students where year="+year+" AND SECTION='"+section+"' order by UID";
                ResultSet rs=st.executeQuery(sql);
