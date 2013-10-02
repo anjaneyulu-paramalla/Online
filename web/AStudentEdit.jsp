@@ -4,6 +4,7 @@
     Author     : Anji
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="javax.swing.text.AbstractDocument.BranchElement" errorPage="Error.jsp"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>
@@ -58,9 +59,7 @@
                             </form>
                          <%}
                          else{
-                             Class.forName("com.mysql.jdbc.Driver");
-                             String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                             Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                             Connection con=new Connector(dept).getConnection();
                              Statement st=con.createStatement();
                              String sql="select UID,UNAME,SECTION,EMAILID,MOBILE from students where ";
                              i=0;
@@ -174,9 +173,7 @@
                          </form>
                      <%}
                      else{
-                         Class.forName("com.mysql.jdbc.Driver");
-                         String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                         Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                         Connection con=new Connector(dept).getConnection();
                          Statement st=con.createStatement();
                          i=0;
                          String dsql="";
@@ -330,9 +327,7 @@
             else if(request.getParameter("status").equals("step")){
                 if(option.toLowerCase().equals("update")){
                      //update
-                    Class.forName("com.mysql.jdbc.Driver");
-                    String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                    Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                    Connection con=new Connector(dept).getConnection();
                     Statement st=con.createStatement();
                     if(request.getParameter("ustat")==null){%>
                         <form action="#" method="post">
@@ -630,9 +625,7 @@
                      if(request.getParameter("status")!=null){
                         int count=Integer.parseInt(request.getParameter("count"));
                         if(request.getParameter("found")!=null){
-                            Class.forName("com.mysql.jdbc.Driver");
-                            String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                            Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                            Connection con=new Connector(dept).getConnection();
                             Statement st=con.createStatement();
                             Statement cl=con.createStatement();
                             String sql="";
@@ -721,9 +714,7 @@
                      }
                  } 
                 else if(option.toLowerCase().equals("move")){
-                    Class.forName("com.mysql.jdbc.Driver");
-                    String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                    Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                    Connection con=new Connector(dept).getConnection();
                     Statement st=con.createStatement();
                     if(request.getParameter("mstatus")==null){
                         String my=request.getParameter("myear");

@@ -4,6 +4,7 @@
     Author     : Anjaneyulu
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -63,9 +64,7 @@
         String uid=(String)session.getAttribute("UID");
         String sdept=(String)session.getAttribute("SDEPT");
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-            String url="jdbc:mysql://localhost:3306/feedback_"+sdept;
-            Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+            Connection con=new Connector(sdept).getConnection();;
             Statement st=con.createStatement();
             ResultSet rs;
             if(request.getParameter("status")==null){

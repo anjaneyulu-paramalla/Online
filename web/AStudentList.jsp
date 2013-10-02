@@ -4,7 +4,7 @@
     Author     : Anjaneyulu
 --%>
 
-<%@page import="com.sun.crypto.provider.RSACipher"%>
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
@@ -66,9 +66,7 @@
         <%if(session.getAttribute("AID")!=null && session.getAttribute("DEPT")!=null){
              String dept=(String)session.getAttribute("DEPT");
              try{
-                 Class.forName("com.mysql.jdbc.Driver");
-                 String uri="jdbc:mysql://localhost:3306/feedback_"+dept;
-                 Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+                 Connection con=new Connector(dept).getConnection();
                  Statement st=con.createStatement();
                  if(request.getParameter("status")==null){%>
                     <center><h3><u>Student data of <%=dept%> Department</u>:</h3>

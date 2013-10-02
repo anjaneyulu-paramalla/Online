@@ -3,6 +3,7 @@
     Created on : Jun 27, 2012, 3:12:55 AM
     Author     : Anjaneyulu
 --%>
+<%@page import="DataConnection.Connector"%>
 <%-- 
     Document   : Feedback
     Created on : May 22, 2012, 3:32:05 AM
@@ -19,9 +20,7 @@
 if(session.getAttribute("UID")!=null && session.getAttribute("UYEAR")!=null && session.getAttribute("USECTION")!=null && session.getAttribute("SDEPT")!=null){
     String sdept=(String)session.getAttribute("SDEPT");
     try{
-    Class.forName("com.mysql.jdbc.Driver");
-    String url="jdbc:mysql://localhost:3306/feedback_"+sdept;
-    Connection con =DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+    Connection con=new Connector(sdept).getConnection();
     Statement st=con.createStatement();
     String uid=""+session.getAttribute("UID");
     String year=""+session.getAttribute("UYEAR");

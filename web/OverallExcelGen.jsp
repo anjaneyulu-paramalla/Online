@@ -4,6 +4,7 @@
     Author     : Anjaneyulu
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%-- 
     Document   : OverallReportGen
     Created on : Jul 27, 2012, 10:18:29 PM
@@ -26,9 +27,7 @@
     try{
         response.setContentType("application/vnd.ms-excel");
         response.setHeader("Content-Disposition","inline;filename="+year+"-"+sem+"_Overall.xls");
-        Class.forName("com.mysql.jdbc.Driver");
-        String uri="jdbc:mysql://localhost:3306/feedback_"+dept; 
-        Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+        Connection con=new Connector(dept).getConnection();
         Statement st=con.createStatement();
         Statement ff=con.createStatement();
         String sql="select SECTIONS from semester where YEAR="+year;

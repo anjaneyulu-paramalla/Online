@@ -4,6 +4,7 @@
     Author     : Anji
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.io.PrintWriter" errorPage="Error.jsp"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="java.sql.ResultSet"%>
@@ -108,9 +109,7 @@
                     else
                         year=4;
                     String format=request.getParameter("sformat");                            
-                    Class.forName("com.mysql.jdbc.Driver");
-                    String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                    Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                    Connection con=new Connector(dept).getConnection();
                     Statement st=con.createStatement();
                     String sql="select distinct(SECTION) from students where year="+year+" order by SECTION";
                     ResultSet rs=st.executeQuery(sql);
@@ -230,9 +229,7 @@
            }
            else{
                String format=request.getParameter("fformat").trim().toLowerCase();
-               Class.forName("com.mysql.jdbc.Driver");
-               String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-               Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+               Connection con=new Connector(dept).getConnection();
                Statement st=con.createStatement();
                String sql="select FNAME,EMAILID,MOBILE from faculty order by FNAME";
                ResultSet rs=st.executeQuery(sql);

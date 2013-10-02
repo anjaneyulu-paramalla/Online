@@ -4,6 +4,7 @@
     Author     : Anji
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.io.StringReader"%>
 <%@page import="org.apache.commons.fileupload.FileItemIterator"%>
 <%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
@@ -291,9 +292,7 @@
                                         }
                                         if(!sql.equals("")){
                                             sql="insert into students (UID,UNAME,PASSWORD,YEAR,SECTION,EMAILID,MOBILE,STATUS) values"+sql;
-                                            Class.forName("com.mysql.jdbc.Driver");
-                                            String uri="jdbc:mysql://localhost:3306/feedback_"+dept;
-                                            Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+                                            Connection con=new Connector(dept).getConnection();
                                             Statement st=con.createStatement();
                                             int rs=st.executeUpdate(sql);
                                             successflag=true; %>
@@ -378,9 +377,7 @@
                                         if(FacClear==true)
                                             StartFid=1;
                                         else{
-                                            Class.forName("com.mysql.jdbc.Driver");
-                                            String uri="jdbc:mysql://localhost:3306/feedback_"+dept;
-                                            Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+                                            Connection con=new Connector(dept).getConnection();
                                             Statement statement=con.createStatement();
                                             String sql="select max(fid) as max from faculty";
                                             ResultSet rs=statement.executeQuery(sql);
@@ -530,9 +527,7 @@
                                 if(!sql.equals("")){
                                     sql="insert into faculty (`FID`,`FNAME`,`EMAILID`,`MOBILE`) values"+sql;
                                     //out.print(sql);
-                                    Class.forName("com.mysql.jdbc.Driver");
-                                    String uri="jdbc:mysql://localhost:3306/feedback_"+dept;
-                                    Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+                                    Connection con=new Connector(dept).getConnection();
                                     Statement st=con.createStatement();%>
                                     <h3><table align="center" cellspacing="0">
                                     <%if(fclear==true){

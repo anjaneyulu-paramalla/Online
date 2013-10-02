@@ -195,9 +195,6 @@
                     try{
                         String id=request.getParameter("id");
                         String dept=request.getParameter("dept");
-                        /*Class.forName("com.mysql.jdbc.Driver");
-                        String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                        Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");*/
                         Connection con=new Connector(dept).getConnection();
                         Statement st=con.createStatement();
                         String sql="select UNAME,PASSWORD,EMAILID from students where UID='"+id+"'";
@@ -283,9 +280,6 @@
                 else if(accounttype.toLowerCase().equals("faculty")){
                     try{
                         String id=request.getParameter("id");
-                        /*Class.forName("com.mysql.jdbc.Driver");
-                        String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                        Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");*/
                         Connection con=new FacConnector().getConnection();
                         Statement st=con.createStatement();
                         String sql="select FID,FNAME,PASSWORD,EMAILID from faculty where FID='"+id+"'";
@@ -370,9 +364,6 @@
                     try{
                         String id=request.getParameter("id");
                         String dept=request.getParameter("dept");
-                        /*Class.forName("com.mysql.jdbc.Driver");
-                        String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                        Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");*/
                         Connection con=new Connector(dept).getConnection();
                         Statement st=con.createStatement();
                         String sql="select AID,ANAME,PASSWORD,EMAILID from admin where AID='"+id+"'";
@@ -458,9 +449,6 @@
                 else if(accounttype.toLowerCase().equals("administrator-2")){
                     try{
                         String id=request.getParameter("id");
-                        /*Class.forName("com.mysql.jdbc.Driver");
-                        String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                        Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");*/
                         Connection con=new FacConnector().getConnection();
                         Statement st=con.createStatement();
                         String sql="select AID,ANAME,PASSWORD,EMAILID from admin where AID='"+id+"'";

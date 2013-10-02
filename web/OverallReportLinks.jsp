@@ -4,6 +4,7 @@
     Author     : Anjaneyulu
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.ResultSet" errorPage="Error.jsp"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -23,9 +24,7 @@
     String sem=request.getParameter("sem");
     String dept=(String)session.getAttribute("DEPT");
     try{
-        Class.forName("com.mysql.jdbc.Driver");
-        String uri="jdbc:mysql://localhost:3306/feedback_"+dept; 
-        Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+        Connection con=new Connector(dept).getConnection();
         Statement st=con.createStatement();
         Statement ff=con.createStatement();
         String sql="select SECTIONS from semester where YEAR="+year; 

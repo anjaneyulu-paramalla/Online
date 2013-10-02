@@ -4,6 +4,7 @@
     Author     : Anjaneyulu
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -27,9 +28,8 @@
     String dept=(String)session.getAttribute("DEPT");
     try{%>
         <h3><center><u>Faculty Details of <%=dept%> Department:</u></center></h3>
-        <%Class.forName("com.mysql.jdbc.Driver");
-        String uri="jdbc:mysql://localhost:3306/feedback_"+dept; 
-        Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+        <%
+        Connection con=new Connector(dept).getConnection();
         Statement st=con.createStatement();
         String sql="select * from faculty order by fname";
         ResultSet rs=st.executeQuery(sql);

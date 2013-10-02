@@ -15,7 +15,7 @@ if(session.getAttribute("PID")==null && session.getAttribute("PYEAR")==null && s
     String specialization=request.getParameter("ucourse");
     if(userID!="" && password!="" && (specialization!=null && specialization!="")){
     try{
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.jdbc.Driver"); 
         String uri="jdbc:mysql://localhost:3306/feedback_"+specialization;
         Connection con=DriverManager.getConnection(uri, "root", "GRIETITOLFF1202");
         Statement st=con.createStatement();

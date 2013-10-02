@@ -4,6 +4,7 @@
     Author     : Anji
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -165,9 +166,7 @@
                         }
                         if(!sql.equals("")){
                             sql="insert into students (UID,UNAME,PASSWORD,YEAR,SECTION,EMAILID,MOBILE,STATUS) values"+sql;
-                            Class.forName("com.mysql.jdbc.Driver");
-                            String uri="jdbc:mysql://localhost:3306/feedback_"+dept;
-                            Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+                            Connection con=new Connector(dept).getConnection();
                             Statement st=con.createStatement();
                             int rs=st.executeUpdate(sql);%>
                             <center>
@@ -195,9 +194,7 @@
                             <input type="hidden" name="insertstate" value="step" />
                             <%int facrows=Integer.parseInt(request.getParameter("facrows"));
                               try{
-                                  Class.forName("com.mysql.jdbc.Driver");
-                                  String url="jdbc:mysql://localhost:3306/feedback_"+dept; 
-                                  Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                                  Connection con=new Connector(dept).getConnection();
                                   Statement st=con.createStatement();
                                   ResultSet rs=st.executeQuery("select max(FID) as max from faculty");
                                   if(rs.next()){
@@ -267,9 +264,7 @@
                         if(!sql.equals("")){
                             sql="insert into faculty (`FID`,`FNAME`,`EMAILID`,`MOBILE`) values"+sql;
                             //out.print(sql);
-                            Class.forName("com.mysql.jdbc.Driver");
-                            String uri="jdbc:mysql://localhost:3306/feedback_"+dept;
-                            Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+                            Connection con=new Connector(dept).getConnection();
                             Statement st=con.createStatement();
                             int rs=st.executeUpdate(sql);%>
                             <h3><table align="center" cellspacing="0">

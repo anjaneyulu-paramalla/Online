@@ -9,7 +9,7 @@
 	<!--database users-->
 	
 	<entry key="root-user">root</entry>
-	<entry key="root-password"></entry>
+	<entry key="root-password">GRIETITOLFF1202</entry>
 	
 	<!--gmail credentials-->
 	<entry key="mail-id"></entry>

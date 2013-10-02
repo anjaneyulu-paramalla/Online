@@ -4,6 +4,7 @@
     Author     : Anji
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.ResultSet" errorPage="Error.jsp"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -66,9 +67,7 @@
                     <input type="hidden" name="status" value="step" />
                     <input type="hidden" name="year" value="<%=year%>" />
                     <input type="hidden" name="option" value="<%=option%>" />
-                    <%Class.forName("com.mysql.jdbc.Driver");
-                    String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                    Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                    <%Connection con=new Connector(dept).getConnection();
                     Statement st=con.createStatement();
                     String sql="select c.YEAR,c.SEMESTER from count c,students s where c.UID=s.UID AND s.YEAR="+year+" group by YEAR,SEMESTER order by YEAR,SEMESTER";
                     ResultSet rs=st.executeQuery(sql);
@@ -154,9 +153,7 @@
         }
         else if(request.getParameter("status").equals("step")){
             if(option.toLowerCase().equals("move all")){
-                Class.forName("com.mysql.jdbc.Driver");
-                String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                Connection con=new Connector(dept).getConnection();
                 Statement st=con.createStatement();
                 if(request.getParameter("mstatus")==null){
                     String my=request.getParameter("myear");
@@ -343,9 +340,7 @@
             }
             else if(option.toLowerCase().equals("delete all")){
                 if(request.getParameter("found")!=null){
-                    Class.forName("com.mysql.jdbc.Driver");
-                    String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                    Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                    Connection con=new Connector(dept).getConnection();
                     Statement st=con.createStatement();
                     String dsql="delete from students where year="+year;
                     if(request.getParameter("found").equals("true")){

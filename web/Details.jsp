@@ -4,6 +4,7 @@
     Author     : Anjaneyulu
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -26,9 +27,7 @@
 if(session.getAttribute("UID")!=null && session.getAttribute("UYEAR")!=null && session.getAttribute("USECTION")!=null && session.getAttribute("SDEPT")!=null){
             String sdept=(String)session.getAttribute("SDEPT");
             try{
-                Class.forName("com.mysql.jdbc.Driver");
-                String uri="jdbc:mysql://localhost:3306/feedback_"+sdept;  
-                Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+                Connection con=new Connector(sdept).getConnection(); 
                 Statement st=con.createStatement();
                 String uid=""+session.getAttribute("UID");
                 String year=""+session.getAttribute("UYEAR");

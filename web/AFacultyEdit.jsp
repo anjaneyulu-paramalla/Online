@@ -4,6 +4,7 @@
     Author     : Anji
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.ResultSet" errorPage="Error.jsp"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -42,9 +43,7 @@
                         <h4><center><input type="button" value="Back" class="redbutton" onclick="history.go(-1);" /></center></h4>
                     <%}
                     else{
-                        Class.forName("com.mysql.jdbc.Driver");
-                        String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                        Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                        Connection con=new Connector(dept).getConnection();
                         Statement st=con.createStatement();
                         i=0;%>
                         <table border="3" cellspacing="0" align="center">
@@ -112,9 +111,7 @@
                     <h4><center><input type="button" value="Back" class="redbutton" onclick="history.go(-1);" /></center></h4>
                 <%}
                 else{
-                    Class.forName("com.mysql.jdbc.Driver");
-                    String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                    Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                    Connection con=new Connector(dept).getConnection();;
                     Statement st=con.createStatement();
                     boolean foundsem=false;
                     String sql="";
@@ -224,9 +221,7 @@
         else{
             if(edit.equals("update")){
                 int i=1,ucount=0;
-                Class.forName("com.mysql.jdbc.Driver");
-                String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+                Connection con=new Connector(dept).getConnection();
                 Statement st=con.createStatement();
                 String sql=new String(), fid=new String(),fname=new String(),femail=new String(),fmobile=new String();
                 while(i<=count){
@@ -293,10 +288,8 @@
                     i++;
                 }
                 //out.print(delsql);
-                Class.forName("com.mysql.jdbc.Driver");
-                String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-                Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
-                Statement statement=con.createStatement();
+                Connection con=new Connector(dept).getConnection();
+                Statement statement=con.createStatement(); 
                 int del=statement.executeUpdate(delsql);
                 statement.close();
                 con.close();%>

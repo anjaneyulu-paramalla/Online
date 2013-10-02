@@ -4,6 +4,7 @@
     Author     : Anjaneyulu
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.ResultSet" errorPage="Error.jsp"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -49,9 +50,7 @@
         <%}
         else{
             try{
-                Class.forName("com.mysql.jdbc.Driver");
-                String uri="jdbc:mysql://localhost:3306/feedback_"+dept; 
-                Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+                Connection con=new Connector(dept).getConnection();
                 Statement st=con.createStatement();
                 String sql="select * from Admin where AID='"+aid+"'";
                 ResultSet rs=st.executeQuery(sql);

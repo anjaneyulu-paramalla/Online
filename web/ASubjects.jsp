@@ -4,6 +4,7 @@
     Author     : Anjaneyulu
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -35,9 +36,7 @@
     else{
         boolean b=false;
         try{
-                Class.forName("com.mysql.jdbc.Driver");
-                String uri="jdbc:mysql://localhost:3306/feedback_"+dept; 
-                Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+                Connection con=new Connector(dept).getConnection();
                 Statement st=con.createStatement();
                 String year=""+request.getParameter("year");
                 String sem=""+request.getParameter("sem");

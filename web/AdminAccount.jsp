@@ -4,6 +4,7 @@
     Author     : Anji
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -45,9 +46,7 @@
         String aid=(String)session.getAttribute("AID");
         String dept=(String)session.getAttribute("DEPT");
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-            String url="jdbc:mysql://localhost:3306/feedback_"+dept;
-            Connection con=DriverManager.getConnection(url,"root","GRIETITOLFF1202");
+            Connection con=new Connector(dept).getConnection();
             Statement st=con.createStatement();
             String sql="select AID,ANAME,EMAILID,MOBILE from admin where AID='"+aid+"'";
             ResultSet rs=st.executeQuery(sql);

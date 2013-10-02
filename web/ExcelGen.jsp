@@ -20,9 +20,7 @@
         String sem=request.getParameter("sem");
         String scode=request.getParameter("scode");
         int fid=Integer.parseInt(request.getParameter("fid"));
-        Class.forName("com.mysql.jdbc.Driver");
-        String uri="jdbc:mysql://localhost:3306/feedback_"+dept;
-        Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202"); 
+        Connection con=new Connector(dept).getConnection();
         Statement st=con.createStatement();
         String sql="select SECTIONS from semester where YEAR="+year;
         ResultSet rs=st.executeQuery(sql);

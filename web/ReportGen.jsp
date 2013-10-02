@@ -3,6 +3,7 @@
     Created on : Jul 9, 2012, 3:06:16 AM
     Author     : Anjaneyulu
 --%>
+<%@page import="DataConnection.Connector"%>
 <%@page import="com.sun.xml.internal.fastinfoset.tools.StAX2SAXReader"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -30,9 +31,7 @@
     String dept=(String)session.getAttribute("DEPT");
     int fid=Integer.parseInt(request.getParameter("fid"));
     try{
-        Class.forName("com.mysql.jdbc.Driver");
-        String uri="jdbc:mysql://localhost:3306/feedback_"+dept;
-        Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+        Connection con=new Connector(dept).getConnection();
         Statement st=con.createStatement();
         String sql="select SECTIONS from semester where YEAR="+year;
         ResultSet rs=st.executeQuery(sql);

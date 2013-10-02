@@ -3,6 +3,7 @@
     Created on : Jun 23, 2012, 6:24:31 PM
     Author     : Anjaneyulu
 --%>
+<%@page import="DataConnection.Connector"%>
 <%@page import="java.sql.ResultSet" errorPage="Error.jsp"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -14,9 +15,7 @@ if(session.getAttribute("UID")==null && session.getAttribute("UYEAR")==null && s
     String studdept=request.getParameter("dept");
     if(userID!="" && password!="" && (studdept!=null && studdept!="")){
     try{
-        Class.forName("com.mysql.jdbc.Driver");
-        String uri="jdbc:mysql://localhost:3306/feedback_"+studdept;
-        Connection con=DriverManager.getConnection(uri, "root", "GRIETITOLFF1202");
+        Connection con=new Connector(studdept).getConnection();
         Statement st=con.createStatement();
         ResultSet rs;
         String sql="select UID,PASSWORD,YEAR,SECTION from students where UID='"+userID+"'";

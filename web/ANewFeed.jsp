@@ -4,6 +4,7 @@
     Author     : Anjaneyulu
 --%>
 
+<%@page import="DataConnection.Connector"%>
 <%@page import="javax.print.attribute.standard.MediaSize.Other" errorPage="Error.jsp"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
@@ -54,11 +55,9 @@
             }
             else
                 bcount=0;%> 
-            <form action="#" method="post" onsubmit="return validateSubjects(this)">
-               
-            <%Class.forName("com.mysql.jdbc.Driver"); 
-            String uri="jdbc:mysql://localhost:3306/feedback_"+dept; 
-            Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+            <form action="#" method="post" onsubmit="return validateSubjects(this)">  
+            <%
+            Connection con=new Connector(dept).getConnection();
             Statement st=con.createStatement();
             Statement pst=con.createStatement();
             ResultSet rs,r;
@@ -313,9 +312,7 @@
             int csec=Integer.parseInt(request.getParameter("csec"));
             int prevcsec=csec-1;
             char prevsect=(char)(65+prevcsec);
-            Class.forName("com.mysql.jdbc.Driver"); 
-            String uri="jdbc:mysql://localhost:3306/feedback_"+dept; 
-            Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+            Connection con=new Connector(dept).getConnection();
             Statement st=con.createStatement();
             Statement pst=con.createStatement();
             ResultSet rs,r;
@@ -360,9 +357,7 @@
             int year=Integer.parseInt(request.getParameter("year"));
             int sem=Integer.parseInt(request.getParameter("sem"));
             int sections=Integer.parseInt(request.getParameter("sec"));
-            Class.forName("com.mysql.jdbc.Driver");
-            String uri="jdbc:mysql://localhost:3306/feedback_"+dept;
-            Connection con=DriverManager.getConnection(uri,"root","GRIETITOLFF1202");
+            Connection con=new Connector(dept).getConnection();
             Statement st=con.createStatement();
             Statement pst=con.createStatement();
             String sql=new String();
