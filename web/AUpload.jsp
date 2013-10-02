@@ -91,7 +91,7 @@
                         int sections=4;
                         if(utype.equals("Import")){%>
                                 <center><h2 ><u><%=dtype%> data <%=utype.toLowerCase()%></u>:</h2>
-                                    <form action="AUploadData1.jsp" method="post">
+                                    <form action="AUploadData.jsp" method="post">
                                     <input type="hidden" name="dtype" value="<%=dtype%>" />
                                     <input type="hidden" name="utype" value="<%=utype%>" />
                                     <input type="hidden" name="status" value="step3" />

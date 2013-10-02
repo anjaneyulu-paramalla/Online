@@ -4,19 +4,13 @@
     Author     : Anji
 --%>
 
-<%@page import="java.io.StringReader"%>
-<%@page import="org.apache.commons.fileupload.FileItemIterator"%>
-<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
-<%@page import="org.apache.commons.fileupload.FileItemStream"%>
-<%@page import="com.sun.org.apache.bcel.internal.generic.AALOAD"%>
-<%@page import="Custom.CustomRequest"%>
-<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.ResultSet" errorPage="Error.jsp"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.io.FileReader"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="Error.jsp"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,19 +20,17 @@
     </head>
     <body>
         <%if(session.getAttribute("AID")!=null && session.getAttribute("DEPT")!=null){
-            CustomRequest customrequest=new CustomRequest(request,(String)session.getAttribute("DEPT"),""+session.getAttribute("ADMINYEAR"));
-            System.out.print(customrequest);
             try{
-                String dtype=customrequest.getParameter("dtype");
-                String utype=customrequest.getParameter("utype");
+                String dtype=request.getParameter("dtype");
+                String utype=request.getParameter("utype");
                 String dept=(String)session.getAttribute("DEPT");%>
                 <center><br /><h2 style="display:inline"><u><%=dtype%> data import</u>:</h2></center>
                 <%if(dtype.equals("Student")){
                     if(utype.equals("Import")){
-                        if(customrequest.getParameter("importstate")==null){
+                        if(request.getParameter("importstate")==null){
                             boolean safe=false;
-                            int year=Integer.parseInt(customrequest.getParameter("year"));
-                            int sections=Integer.parseInt(customrequest.getParameter("sections"));%>
+                            int year=Integer.parseInt(request.getParameter("year"));
+                            int sections=Integer.parseInt(request.getParameter("sections"));%>
                             <form action="#" method="post">
                                 <input type="hidden" name="dtype" value="<%=dtype%>" />
                                 <input type="hidden" name="utype" value="<%=utype%>" />
@@ -47,8 +39,8 @@
                                   int sel=0,i=0;
                                   while(i<4){
                                       char ch=(char)(65+i);
-                                      if(customrequest.getParameter("sec"+ch)!=null){
-                                          sec[sel]=customrequest.getParameter("sec"+ch);
+                                      if(request.getParameter("sec"+ch)!=null){
+                                          sec[sel]=request.getParameter("sec"+ch);
                                           sel++; 
                                       }
                                       i++;
@@ -69,26 +61,38 @@
                                             </h3>
                                     </center>
                                     <%String err="";
-                                    String fformat=customrequest.getParameter("sec"+sec[i]+"format");
+                                    String fformat=request.getParameter("sec"+sec[i]+"format");
                                     if(fformat==null)
                                         err+="You didn't select File Format!<br />";
-                                    String fkey="sec"+sec[i]+"file";
-                                    String fname=customrequest.getParameter(fkey);
-                                    if(fname==null||fname=="")
+                                    String fname=request.getParameter("sec"+sec[i]+"file");
+                                    if(fname==null)
                                         err+="You didn't choose the file!<br />";
+                                    String fpath=request.getParameter("sec"+sec[i]+"path").trim();
+                                    if(fpath.equals(""))
+                                        err+="You didn't specify file location!";
                                     int fskip=1;
-                                    if(customrequest.getParameter("sec"+sec[i]+"skip")!=null)
-                                        fskip=Integer.parseInt(customrequest.getParameter("sec"+sec[i]+"skip"));
+                                    if(request.getParameter("sec"+sec[i]+"skip")!=null)
+                                        fskip=Integer.parseInt(request.getParameter("sec"+sec[i]+"skip"));
                                     String fpass="random";
-                                    if(customrequest.getParameter("sec"+sec[i]+"pass")!=null)
-                                        fpass=customrequest.getParameter("sec"+sec[i]+"pass");
+                                    if(request.getParameter("sec"+sec[i]+"pass")!=null)
+                                        fpass=request.getParameter("sec"+sec[i]+"pass");
                                     if(err.equals("")){
+                                        int fplen=fpath.length()-1;
+                                        char lastchar=fpath.charAt(fplen);
+                                        if(lastchar!='\\'||lastchar!='/'){
+                                            if(fpath.contains("\\")){
+                                                fpath=fpath+"\\";
+                                            }
+                                            else
+                                                fpath=fpath+"/";
+                                        }
+                                        fpath=fpath+fname;
                                         if(fformat.equals("CSV")){
                                             int fflen=fname.trim().length();
-                                            int fdotlen=fname.trim().lastIndexOf('.')+1;
-                                            if(fname.trim().toLowerCase().substring(fdotlen, fflen).equals("csv")){
+                                            if(fname.trim().toLowerCase().substring(fflen-4, fflen).equals(".csv")){
                                                 try{
-                                                    BufferedReader br=new BufferedReader(new StringReader(customrequest.getFileStream(fkey))); 
+                                                    FileReader fr=new FileReader(fpath);
+                                                    BufferedReader br=new BufferedReader(fr);
                                                     String str=new String();
                                                     int j=0,skip=0,sno=0; 
                                                     String stud[]={"","","",""};
@@ -136,8 +140,8 @@
                                                         </tr>
                                                     <%}%>
                                                     </table>
-                                                    <%
-                                                    br.close();
+                                                    <%br.close();
+                                                    fr.close();
                                                     if(j!=0){
                                                         safe=true;%>
                                                         <center><b><span style="color: red">Note:</span>if email id is not in proper format then the corresponding student details will not be imported!</b></center>
@@ -195,14 +199,14 @@
                         <%} 
                         else{
                             try{ 
-                                int year=Integer.parseInt(customrequest.getParameter("year"));
-                                int sections=Integer.parseInt(customrequest.getParameter("sections"));
+                                int year=Integer.parseInt(request.getParameter("year"));
+                                int sections=Integer.parseInt(request.getParameter("sections"));
                                 String sec[]=new String[4];
                                 int sel=0,i=0;
                                 while(i<sections){
                                     char ch=(char)(65+i); 
-                                    if(customrequest.getParameter("sec"+ch)!=null){
-                                        sec[sel]=customrequest.getParameter("sec"+ch);
+                                    if(request.getParameter("sec"+ch)!=null){
+                                        sec[sel]=request.getParameter("sec"+ch);
                                         sel++;
                                     }
                                     i++;
@@ -224,8 +228,8 @@
                                             </h3>
                                     </center>
                                     <%try{
-                                        String passtype=customrequest.getParameter("pass"+sec[i]);
-                                        int scount=Integer.parseInt(customrequest.getParameter("scount"+sec[i]));
+                                        String passtype=request.getParameter("pass"+sec[i]);
+                                        int scount=Integer.parseInt(request.getParameter("scount"+sec[i]));
                                         int j=1; 
                                         boolean flag=false;  
                                         String sql=""; 
@@ -246,10 +250,10 @@
                                             rk++;
                                         }
                                         while(j<=scount){
-                                            String sid=customrequest.getParameter("sid"+sec[i]+j).trim();
-                                            String sname=customrequest.getParameter("sname"+sec[i]+j).trim();
-                                            String semail=customrequest.getParameter("semail"+sec[i]+j).trim();
-                                            String smobile=customrequest.getParameter("smobile"+sec[i]+j).trim();
+                                            String sid=request.getParameter("sid"+sec[i]+j).trim();
+                                            String sname=request.getParameter("sname"+sec[i]+j).trim();
+                                            String semail=request.getParameter("semail"+sec[i]+j).trim();
+                                            String smobile=request.getParameter("smobile"+sec[i]+j).trim();
                                             if(sid.equals("")||sname.equals("")||semail.equals("")){
                                                 j++;
                                                 continue;
@@ -342,35 +346,35 @@
                 }
                 else{
                     if(utype.equals("Import")){
-                        if(customrequest.getParameter("importstate")==null){%>  
+                        if(request.getParameter("importstate")==null){%>  
                             <form action="#" method="post" >
                                 <input type="hidden" name="dtype" value="<%=dtype%>" />
                                 <input type="hidden" name="utype" value="<%=utype%>" />
                                 <input type="hidden" name="importstate" value="step" />
                             <%String err="";
-                            String FacFormat=customrequest.getParameter("facformat");
+                            String FacFormat=request.getParameter("facformat");
                             if(FacFormat==null)
                                 err+="You didn't select File Format!<br />";
-                            String FacName=customrequest.getParameter("facfile");
+                            String FacName=request.getParameter("facfile");
                             if(FacName==null)
                                 err+="You didn't choose the file!<br />";
-                            String FacPath=customrequest.getParameter("facpath").trim();
+                            String FacPath=request.getParameter("facpath").trim();
                             if(FacPath.equals(""))
                                 err+="You didn't specify file location!";
-                            int FacSkip=Integer.parseInt(customrequest.getParameter("facskip"));
+                            int FacSkip=Integer.parseInt(request.getParameter("facskip"));
                             boolean FacClear=false;
-                            if(customrequest.getParameter("facclear")!=null)
+                            if(request.getParameter("facclear")!=null)
                                 FacClear=true;
                             if(err==""){
                                 int fplen=FacPath.length()-1;
                                 char lastchar=FacPath.charAt(fplen);
-                                /*if(lastchar!='\\'||lastchar!='/'){
+                                if(lastchar!='\\'||lastchar!='/'){
                                     if(FacPath.contains("\\")){
                                         FacPath=FacPath+"\\";
                                     }
                                     else
                                         FacPath=FacPath+"/";
-                                }*/
+                                }
                                 FacPath=FacPath+FacName;%>
                                 <input type="hidden" name="facfile" value="<%=FacPath%>" />
                                 <input type="hidden" name="facskip" value="<%=FacSkip%>" />
@@ -492,13 +496,13 @@
                         <%}
                         else{
                             try{
-                                int start=Integer.parseInt(customrequest.getParameter("start"));
-                                int end=Integer.parseInt(customrequest.getParameter("end"));
+                                int start=Integer.parseInt(request.getParameter("start"));
+                                int end=Integer.parseInt(request.getParameter("end"));
                                 int is=start,dups=start,es=end;
-                                boolean fclear=Boolean.parseBoolean(customrequest.getParameter("facclear"));
+                                boolean fclear=Boolean.parseBoolean(request.getParameter("facclear"));
                                 String fname=new String(),femail=new String(),fmobile=new String(),sql=new String();
                                 while(is<es){
-                                    fname=customrequest.getParameter("fname"+is).trim();
+                                    fname=request.getParameter("fname"+is).trim();
                                     if(fname.trim().equals("")){
                                         if(is==es-1){
                                             if(!sql.equals("")){
@@ -509,7 +513,7 @@
                                         is++;
                                         continue;
                                     }
-                                    femail=customrequest.getParameter("femail"+is).trim();
+                                    femail=request.getParameter("femail"+is).trim();
                                     if(!femail.equals("")){
                                         if(femail.contains("@")){
                                             int mlen=femail.length();
@@ -524,7 +528,7 @@
                                             femail="";
                                         }
                                     }
-                                    fmobile=customrequest.getParameter("fmobile"+is);
+                                    fmobile=request.getParameter("fmobile"+is);
                                     if(is<es-1)
                                         sql+="('"+dups+"','"+fname+"','"+femail+"','"+fmobile+"'),";
                                     else

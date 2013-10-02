@@ -295,11 +295,11 @@ if((session.getAttribute("UID")==null || session.getAttribute("UYEAR")==null || 
                                 </td>
                             </tr>-->
                             </tbody>
-                            <tr id="extraspace" height="8px "/>
+                            <tr id="extraspace" height="8px" />
                             <tr><td align="right" valign="bottom" >User ID</td><td align="left" ><input  type="text" id="uname" name="uname"/></td></tr>
-                            <tr height="8px "/>
+                            <tr height="8px" />
                             <tr><td align="right" valign="bottom" >Password</td><td align="left" ><input onkeypress="handleEnter(this, event)" type="Password" id="upwd" name="upwd"/></td></tr>
-                            <tr height="8px "/>
+                            <tr height="8px" />
                             <tr><td colspan="2" align="left" style="color:red;font-weight:bold" >
                                     <noscript>
                                     <table >

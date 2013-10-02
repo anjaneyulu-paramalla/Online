@@ -4,8 +4,8 @@
     Author     : Anji
 --%>
 
-<%@page import="java.util.Enumeration" errorPage="Error.jsp"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Enumeration"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="Error.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,8 +24,8 @@
                 if(dtype.equals("Student")){%>
                     <%int year=Integer.parseInt(request.getParameter("year"));
                     int sections=Integer.parseInt(request.getParameter("sections"));
-                    session.setAttribute("ADMINYEAR", ""+year);
                     String RYear=new String();
+                    String platform=request.getHeader("User-Agent").toLowerCase();
                     if(year==1)
                         RYear="I";
                     else if(year==2)
@@ -49,7 +49,7 @@
                         }
                         //out.print(seclength);
                         %>
-                        <form method="post" action="AUploadImport1.jsp" enctype="multipart/form-data">
+                        <form method="post" action="AUploadImport.jsp">
                         <center>
                         <%
                         if(seclength>=2){%>
@@ -86,12 +86,27 @@
                                         <th colspan="2" style="border-width: 0"><u>Import for <%=dept%> <%=RYear%> <%=c%> section</u>:</th>
                                     </tr>
                                     <tr>
-                                        <th align="right" style="border-width: 0">Format:</th>
+                                        <th align="right" align="left" style="border-width: 0">Format:</th>
                                         <th align="left" style="border-width: 0"><select name="sec<%=c%>format"><option>CSV</option><!--option>Other Excel Format</option--></select></th>
                                     </tr>
                                     <tr>
-                                        <th align="right"  style="border-width: 0">File:</th>
+                                        <th align="right" align="left" style="border-width: 0">File:</th>
                                         <th align="left" style="border-width: 0"><input type="file" name="sec<%=c%>file"/></th>
+                                    </tr>
+                                    <tr>
+                                        <th align="right" style="border-width: 0">File Location:</th>
+                                        <th align="left" style="border-width: 0"><input type="text" name="sec<%=c%>path" size="30"/></th>
+                                    </tr>
+                                    <tr >
+                                        <th  style="border-width: 0"></th>
+                                        <th  valign="top" align="left" style="border-width: 0;">
+                                            <%if(platform.contains("linux")){%>
+                                            <span style="color: #3333ff;"><small><sup>e.g /home/griet/Desktop</sup></small></span>
+                                            <%}
+                                            else{%>
+                                            <span style="color:#3333ff;"><small><sup>e.g C:/Users/griet/Desktop</sup></small></span>
+                                            <%}%>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <th valign="top" align="right" style="border-width: 0">No. of rows to skip:</th>
@@ -99,7 +114,7 @@
                                     </tr>
                                     <tr>
                                         <!--th style="border-width: 0"-->
-                                        <th colspan="2" align="center" valign="top" style="border-width: 0">
+                                        <th colspan="2"align="center" valign="top" style="border-width: 0">
                                             <%--<input id="clear" type="checkbox" name="sec<%=c%>clear" value="clear" checked/>
                                             <label for="clear">
                                                 clear previous Data
@@ -112,7 +127,7 @@
                                             <!--input id="pass" type="checkbox" name="sec<%=c%>pass" value="use" checked/-->
                                             &nbsp;&nbsp;<input id="pas2<%=c%>" type="radio" name="sec<%=c%>pass" value="random" checked/>
                                             <label for="pas2<%=c%>">
-                                                randomly generate password 
+                                                randomly generate passwords 
                                             </label>
                                         </th>
                                     </tr>
@@ -247,9 +262,10 @@
                     <%} 
                 }
                 else{
-                    if(utype.equals("Import")){%>
+                    if(utype.equals("Import")){
+                        String platform=request.getHeader("User-Agent").toLowerCase();%>
                         <center><h2><u><%=dtype%> data <%=utype.toLowerCase()%></u>:</h2></center>
-                        <form method="post" action="AUploadImport1.jsp" enctype="multipart/form-data">
+                        <form method="post" action="AUploadImport.jsp">
                         <center>
                         <table border="3" style="border-radius:10px;background-color: #ccffcc" >
                             <tr>
@@ -262,6 +278,21 @@
                             <tr>
                                 <th align="right"align="left" style="border-width: 0">File:</th>
                                 <th align="left" style="border-width: 0"><input type="file" name="facfile"/></th>
+                            </tr>
+                            <tr>
+                                <th align="right" style="border-width: 0">File Location:</th>
+                                <th align="left" style="border-width: 0"><input type="text" name="facpath"size="30"/></th>
+                            </tr>
+                            <tr>
+                                <th  style="border-width: 0"></th>
+                                <th  valign="top" align="left" style="border-width: 0;">
+                                <%if(platform.contains("linux")){%>
+                                    <span style="color: #3333ff;"><small><sup>e.g /home/griet/Desktop</sup></small></span>
+                                <%}
+                                else{%>
+                                    <span style="color:#3333ff;"><small><sup>e.g C:/Users/griet/Desktop</sup></small></span>
+                                <%}%>
+                                </th>
                             </tr>
                             <tr>
                                 <th valign="top" align="right" style="border-width: 0">No. of rows to skip:</th>
