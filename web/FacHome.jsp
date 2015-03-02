@@ -4,7 +4,7 @@
     Author     : Anji
 --%>
 
-<%@page import="DataConnection.FacConnector"%>
+<%@page import="org.data.connection.FacConnector"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>

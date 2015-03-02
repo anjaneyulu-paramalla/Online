@@ -4,7 +4,7 @@
     Author     : Anjaneyulu
 --%>
 
-<%@page import="DataConnection.Connector"%>
+<%@page import="org.data.connection.Connector"%>
 <%@page import="java.sql.ResultSet" errorPage="Error.jsp"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Statement"%>

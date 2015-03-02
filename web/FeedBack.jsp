@@ -3,7 +3,7 @@
     Created on : Jun 27, 2012, 3:12:55 AM
     Author     : Anjaneyulu
 --%>
-<%@page import="DataConnection.Connector"%>
+<%@page import="org.data.connection.Connector"%>
 <%-- 
     Document   : Feedback
     Created on : May 22, 2012, 3:32:05 AM

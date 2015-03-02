@@ -4,13 +4,13 @@
     Author     : Anji
 --%>
 
-<%@page import="DataConnection.Connector"%>
+<%@page import="org.data.connection.Connector"%>
 <%@page import="java.io.StringReader"%>
 <%@page import="org.apache.commons.fileupload.FileItemIterator"%>
 <%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@page import="org.apache.commons.fileupload.FileItemStream"%>
 <%@page import="com.sun.org.apache.bcel.internal.generic.AALOAD"%>
-<%@page import="Custom.CustomRequest"%>
+<%@page import="org.custom.CustomRequest"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>

@@ -6,7 +6,7 @@
 
 
 <%@page import="com.sun.mail.util.QDecoderStream" errorPage="Error.jsp"%>
-<%@page import="DataConnection.FacConnector"%>
+<%@page import="org.data.connection.FacConnector"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Statement"%>

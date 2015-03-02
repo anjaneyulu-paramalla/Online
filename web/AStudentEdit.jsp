@@ -4,7 +4,7 @@
     Author     : Anji
 --%>
 
-<%@page import="DataConnection.Connector"%>
+<%@page import="org.data.connection.Connector"%>
 <%@page import="javax.swing.text.AbstractDocument.BranchElement" errorPage="Error.jsp"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>

@@ -3,7 +3,7 @@
     Created on : Jul 9, 2012, 3:06:16 AM
     Author     : Anjaneyulu
 --%>
-<%@page import="DataConnection.Connector"%>
+<%@page import="org.data.connection.Connector"%>
 <%@page import="com.sun.xml.internal.fastinfoset.tools.StAX2SAXReader"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>

@@ -4,9 +4,9 @@
     Author     : Anji
 --%>
 
-<%@page import="DataConnection.MCAConnector" errorPage="Error.jsp"%>
-<%@page import="DataConnection.MBAConnector"%>
-<%@page import="DataConnection.MTechConnector"%>
+<%@page import="org.data.connection.MCAConnector" errorPage="Error.jsp"%>
+<%@page import="org.data.connection.MBAConnector"%>
+<%@page import="org.data.connection.MTechConnector"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>

@@ -4,7 +4,7 @@
     Author     : Anji
 --%>
 
-<%@page import="DataConnection.FacConnector" errorPage="Error.jsp"%>
+<%@page import="org.data.connection.FacConnector" errorPage="Error.jsp"%>
 <%@page import="javax.mail.Transport"%>
 <%@page import="javax.mail.internet.InternetAddress"%>
 <%@page import="javax.mail.internet.MimeMessage"%>
@@ -15,7 +15,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="DataConnection.Connector"%>
+<%@page import="org.data.connection.Connector"%>
 <%@page import="java.util.Enumeration"%>
 <!DOCTYPE html>
 <html>

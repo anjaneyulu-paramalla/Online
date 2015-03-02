@@ -3,7 +3,7 @@
     Created on : Jun 24, 2012, 1:48:39 AM
     Author     : Anjaneyulu
 --%>
-<%@page import="DataConnection.Connector"%>
+<%@page import="org.data.connection.Connector"%>
 <%@page import="java.sql.ResultSet" errorPage="Error.jsp"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>

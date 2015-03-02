@@ -4,7 +4,7 @@
     Author     : Anji
 --%>
 
-<%@page import="DataConnection.FacConnector" errorPage="Error.jsp"%>
+<%@page import="org.data.connection.FacConnector" errorPage="Error.jsp"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Statement"%>
