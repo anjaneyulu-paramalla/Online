@@ -24,10 +24,10 @@ public class FacConnector {
             con=DriverManager.getConnection(url,"STAFF","STAFFOLFF1202619");*/ 
             Properties properties=new Properties();
             try{
-                properties.loadFromXML(new FileInputStream("../config.xml"));
+                properties.loadFromXML(new FileInputStream("config.xml"));
             }
             catch(IOException ie){
-                 System.out.println("config file not found in directory: "+new File("../").getAbsolutePath());
+                 System.out.println("config file not found in directory: "+new File(".").getAbsolutePath());
                  throw ie;
             }
             String driver=properties.getProperty("driver");

@@ -4,6 +4,9 @@
     Author     : Anji
 --%>
 
+<%@page import="java.io.File"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.FileInputStream"%>
 <%@page import="org.data.connection.FacConnector" errorPage="Error.jsp"%>
 <%@page import="javax.mail.Transport"%>
 <%@page import="javax.mail.internet.InternetAddress"%>
@@ -221,17 +224,37 @@
                                     props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
                                     props.put("mail.smtp.auth", "true");
                                     props.put("mail.smtp.port", "465");
-                                    String user="@gmail.com";
+                                    //get mail credentials!
+                                    Properties properties=new Properties();
+                                    try{
+                                        properties.loadFromXML(new FileInputStream("config.xml"));
+                                    }
+                                    catch(IOException ie){
+                                         System.out.println("config file not found in directory: "+new File(".").getAbsolutePath());
+                                         throw ie;
+                                    }
+                                    String mailId=properties.getProperty("mail-id");
+                                    String mailPassword=properties.getProperty("mail-password");
+                                    
                                     Session session1=Session.getInstance(props,
                                         new javax.mail.Authenticator() {
                                             protected PasswordAuthentication getPasswordAuthentication(){
-                                                String use="";
-                                                return new PasswordAuthentication("grietolfs@gmail.com",use); 
+                                                Properties properties=new Properties();
+                                                try{
+                                                    properties.loadFromXML(new FileInputStream("config.xml"));
+                                                }
+                                                catch(IOException ie){
+                                                     System.out.println("config file not found in directory: "+new File(".").getAbsolutePath());
+                                                }
+                                                String mailId=properties.getProperty("mail-id");
+                                                String mailPassword=properties.getProperty("mail-password");
+                                                return new PasswordAuthentication(mailId, mailPassword); 
                                             }
                                         }   
                                     );    
+                                    
                                     Message message=new MimeMessage(session1);
-                                    message.setFrom(new InternetAddress(user));
+                                    message.setFrom(new InternetAddress(mailId));
                                     message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
                                     message.setSubject("Griet OLFS: Student Login Credentials!");
                                     message.setText("Hello "+name+", \nYour account credentials are:\n    User ID: "+id+"\nPassword: "+cred );
@@ -306,17 +329,36 @@
                                         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
                                         props.put("mail.smtp.auth", "true");
                                         props.put("mail.smtp.port", "465");
-                                        String user="@gmail.com";
+                                        //get mail credentials!
+                                        Properties properties=new Properties();
+                                        try{
+                                            properties.loadFromXML(new FileInputStream("config.xml"));
+                                        }
+                                        catch(IOException ie){
+                                             System.out.println("config file not found in directory: "+new File(".").getAbsolutePath());
+                                             throw ie;
+                                        }
+                                        String mailId=properties.getProperty("mail-id");
+                                        String mailPassword=properties.getProperty("mail-password");
                                         Session session1=Session.getInstance(props,
                                             new javax.mail.Authenticator() {
                                                 protected PasswordAuthentication getPasswordAuthentication(){
-                                                    String use="";
-                                                    return new PasswordAuthentication("grietolfs@gmail.com",use); 
+                                                    //get mail credentials!
+                                                    Properties properties=new Properties();
+                                                    try{
+                                                        properties.loadFromXML(new FileInputStream("config.xml"));
+                                                    }
+                                                    catch(IOException ie){
+                                                         System.out.println("config file not found in directory: "+new File(".").getAbsolutePath());
+                                                    }
+                                                    String mailId=properties.getProperty("mail-id");
+                                                    String mailPassword=properties.getProperty("mail-password");
+                                                    return new PasswordAuthentication(mailId,mailPassword); 
                                                 }
                                             }   
                                         );    
                                         Message message=new MimeMessage(session1);
-                                        message.setFrom(new InternetAddress(user));
+                                        message.setFrom(new InternetAddress(mailId));
                                         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
                                         message.setSubject("Griet OLFS: Faculty Login Credentials!");
                                         message.setText("Hello "+name+", \nYour login credentials are:\n    User ID: "+id+"\n Password: "+cred );
@@ -390,17 +432,36 @@
                                         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
                                         props.put("mail.smtp.auth", "true");
                                         props.put("mail.smtp.port", "465");
-                                        String user="@gmail.com";
+                                         //get mail credentials!
+                                        Properties properties=new Properties();
+                                        try{
+                                            properties.loadFromXML(new FileInputStream("config.xml"));
+                                        }
+                                        catch(IOException ie){
+                                             System.out.println("config file not found in directory: "+new File(".").getAbsolutePath());
+                                             throw ie;
+                                        }
+                                        String mailId=properties.getProperty("mail-id");
+                                        String mailPassword=properties.getProperty("mail-password");
                                         Session session1=Session.getInstance(props,
                                             new javax.mail.Authenticator() {
                                                 protected PasswordAuthentication getPasswordAuthentication(){
-                                                    String use="";
-                                                    return new PasswordAuthentication("grietolfs@gmail.com",use); 
+                                                    //get mail credentials!
+                                                    Properties properties=new Properties();
+                                                    try{
+                                                        properties.loadFromXML(new FileInputStream("config.xml"));
+                                                    }
+                                                    catch(IOException ie){
+                                                         System.out.println("config file not found in directory: "+new File(".").getAbsolutePath());
+                                                    }
+                                                    String mailId=properties.getProperty("mail-id");
+                                                    String mailPassword=properties.getProperty("mail-password");
+                                                    return new PasswordAuthentication(mailId,mailPassword); 
                                                 }
                                             }   
                                         );    
                                         Message message=new MimeMessage(session1);
-                                        message.setFrom(new InternetAddress(user));
+                                        message.setFrom(new InternetAddress(mailId));
                                         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
                                         message.setSubject("Griet OLFS:"+dept+" Admin Login Credentials!");
                                         message.setText("Hello "+name+", \nYour login credentials are:\n Department: "+dept+"\n       User ID: "+id+"\n   Password: "+cred );
@@ -475,17 +536,36 @@
                                         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
                                         props.put("mail.smtp.auth", "true");
                                         props.put("mail.smtp.port", "465");
-                                        String user="@gmail.com";
+                                        //get mail credentials!
+                                        Properties properties=new Properties();
+                                        try{
+                                            properties.loadFromXML(new FileInputStream("config.xml"));
+                                        }
+                                        catch(IOException ie){
+                                             System.out.println("config file not found in directory: "+new File(".").getAbsolutePath());
+                                             throw ie;
+                                        }
+                                        String mailId=properties.getProperty("mail-id");
+                                        String mailPassword=properties.getProperty("mail-password");
                                         Session session1=Session.getInstance(props,
                                             new javax.mail.Authenticator() {
                                                 protected PasswordAuthentication getPasswordAuthentication(){
-                                                    String use="";
-                                                    return new PasswordAuthentication("grietolfs@gmail.com",use); 
+                                                     //get mail credentials!
+                                                    Properties properties=new Properties();
+                                                    try{
+                                                        properties.loadFromXML(new FileInputStream("config.xml"));
+                                                    }
+                                                    catch(IOException ie){
+                                                         System.out.println("config file not found in directory: "+new File(".").getAbsolutePath());
+                                                    }
+                                                    String mailId=properties.getProperty("mail-id");
+                                                    String mailPassword=properties.getProperty("mail-password");
+                                                    return new PasswordAuthentication(mailId,mailPassword); 
                                                 }
                                             }   
                                         );    
                                         Message message=new MimeMessage(session1);
-                                        message.setFrom(new InternetAddress(user));
+                                        message.setFrom(new InternetAddress(mailId));
                                         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
                                         message.setSubject("Griet OLFS: Admin-2 Login Credentials!");
                                         message.setText("Hello "+name+", \nYour login credentials are:\n    User ID: "+id+"\n Password: "+cred );
